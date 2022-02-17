@@ -16,36 +16,35 @@ namespace DungeonCrawl2.Data.Game.Map
 			get { return s_Singleton; }
 		}
 
-		public MapArea Generate(uint height, uint width)
+		public MapArea Generate(int height, int width)
 		{
 			MapArea map = new MapArea(height, width);
-			map.Locations = GenerateLocations(height, width);
-			//GeneratePaths(map);
+			GenerateLocations(ref map);
 
 			return map;
 		}
-		private List<Location> GenerateLocations(uint height, uint width)
+		private void GenerateLocations(ref MapArea resultMap)
 		{
-			List<Location> locations = new List<Location>();
 			Random rand = new Random();
+			int numLocations = rand.Next(resultMap.MapHeight * resultMap.MapWidth / 6);
 
-			for (int row = 0; row < height; row++)
+			Dictionary<int, Location> occupiedX = new Dictionary<int, Location>();
+			Dictionary<int, Location> occupiedY = new Dictionary<int, Location>();
+
+			for (int location = 0; location < numLocations; location++)
 			{
-				for (int col = 0; col < width; col++)
-				{
-					map[row,col] = 0;
+				Location area = new Location();
+				int x = rand.Next(resultMap.MapHeight);
+				int y = rand.Next(resultMap.MapWidth);
 
-					if (rand.Next(10) == 0)
-					{
-						map[row, col] = 2;
-					}
+				if (occupiedX.TryGetValue(x, out bool value) == false && occupiedY.TryGetValue(y, out bool value2) == false)
+				{
+					area.SetLocation(x, y);
 				}
 			}
-			return locations;
 		}
-		private uint[,] GeneratePath(uint[,] map)
+		private void GeneratePath(ref MapArea resultMap)
 		{
-			return map;
 		}
 		private int CalculateCellDistance(int x1, int y1, int x2, int y2)
 		{

@@ -11,20 +11,20 @@ namespace DungeonCrawl2.Data.Game.Map
 	public class Location
 	{
 		string m_Name;
-		uint m_XPos;
-		uint m_YPos;
+		int m_XPos;
+		int m_YPos;
 		bool m_IsInWorld;
-		uint[] lootTable = new uint[(uint)ItemType._END];
+		int[] lootTable = new int[(int)ItemType._END];
 
 		public string Name { get { return m_Name; } set { m_Name = value; } }
-		public uint XPos { get { return m_XPos; } set { m_XPos = value; } }
-		public uint YPos { get { return m_YPos; } set { m_YPos = value; } }
+		public int XPos { get { return m_XPos; } set { m_XPos = value; } }
+		public int YPos { get { return m_YPos; } set { m_YPos = value; } }
 		public bool IsInWorld { get { return m_IsInWorld; } set { m_IsInWorld = value; } }
 		public Location()
 		{
 			m_IsInWorld = false;
 		}
-		public void SetLocation(uint xPos, uint yPos)
+		public void SetLocation(int xPos, int yPos)
 		{
 			m_XPos = xPos;
 			m_YPos = yPos;
